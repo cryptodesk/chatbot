@@ -62,7 +62,8 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
     });
 });
 
-controller.hears(['hola'], 'message_received', (bot, message) => {
+//controller.hears(['hola'], 'message_received', (bot, message) => {
+controller.on('message_received', (bot, message) => {
     bot.startConversation(message, (err, convo) => {
         convo.say('Hola, somos instamaki.');
         convo.say({
@@ -129,7 +130,7 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
             });
 
 
-            let correct = false;
+            /*let correct = false;
             controller.hears(['A','B','C'], 'message_received', (bot, message) => {
                 //bot.startConversation(message, (err, convo) => {
                     convo.say('Muy buena elección!');
@@ -145,7 +146,7 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
 
             if (!correct){
                 convo.say('Tu opción no se encuentra dentro de la lista');
-            }
+            }*/
 
             convo.say('¿Donde quieres que te lo enviemos?');
             convo.ask({

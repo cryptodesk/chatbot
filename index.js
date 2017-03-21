@@ -131,10 +131,10 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
 
             let correct = false;
             controller.hears(['A','B','C'], 'message_received', (bot, message) => {
-                bot.startConversation(message, (err, convo) => {
+                //bot.startConversation(message, (err, convo) => {
                     convo.say('Muy buena elección!');
                     correct = true;
-                });
+                //});
 
                 //conversations[message.channel] = {
                     //status: CONVERSATION_STATUS_HELLO,
@@ -146,7 +146,7 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
             if (!correct){
                 convo.say('Tu opción no se encuentra dentro de la lista');
             }
-            
+
             convo.say('¿Donde quieres que te lo enviemos?');
             convo.ask({
                 'text': 'Compartir ubicación',

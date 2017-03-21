@@ -63,9 +63,10 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 });
 
 //controller.hears(['hola'], 'message_received', (bot, message) => {
-
+let flag= true ;
 controller.on('message_received', (bot, message) => {
-    if(!conversations[message.channel]){
+    if(flag){
+        flag = false ;
         bot.startConversation(message, (err, convo) => {
             convo.say('Hola, somos instamaki.');
             convo.say({
@@ -207,6 +208,7 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
             }
             );
             convo.say('Disfruta del sushi!:)');
+            flag = true ;
             counter= true ;
             conversations[message.channel].status = CONVERSATION_STATUS_PAGO;
         });

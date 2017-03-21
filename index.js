@@ -141,6 +141,8 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                 conversations[message.channel].coordinates = response.attachments[0].payload.coordinates;
                 convo.next();
             });
+            convo.say('Genial! Tu pedido ya está en camino.');
+            convo.say('Aquí tienes tu recibo');
             convo.say({
                 "attachment":{
                     "type":"template",

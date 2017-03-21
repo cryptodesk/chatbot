@@ -14,8 +14,8 @@ let conversations = {};
 
 const ops = commandLineArgs([
       {
-          name: 'lt',
           alias: 'l',
+          name: 'lt',
           args: 1,
           description: 'Use localtunnel.me to make your bot available on the web.',
           type: Boolean,
@@ -32,7 +32,7 @@ const ops = commandLineArgs([
 ]);
 
 let controller = botkit.facebookbot({
-    debug: true,
+    debug: false,
     log: true,
     access_token: process.env.FACEBOOK_PAGE_TOKEN,
     verify_token: process.env.FACEBOOK_WEBHOOK_VERIFY_TOKEN,

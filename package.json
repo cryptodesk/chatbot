@@ -1,0 +1,18 @@
+{
+    "name": "chatbots",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js --lt --ltsubdomain gabriel"
+    },
+    "author": "Gabriel Esteban <yufuven@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "botkit": "^0.5.2",
+        "command-line-args": "^4.0.2",
+        "dotenv": "^4.0.0",
+        "localtunnel": "^1.8.2"
+    }
+}

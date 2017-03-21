@@ -5,7 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node index.js --lt --ltsubdomain gabriel"
+        "start": "node index.js",
+        "tunel": "node index.js --lt --ltsubdomain gabriel"
     },
     "author": "Gabriel Esteban <yufuven@gmail.com>",
     "license": "MIT",

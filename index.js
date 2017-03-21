@@ -65,7 +65,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 //controller.hears(['hola'], 'message_received', (bot, message) => {
 let counter = true;
 if(counter){
-
+    counter= false ;
     controller.on('message_received', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
             convo.say('Hola, somos instamaki.');
@@ -97,7 +97,7 @@ if(counter){
             items: []
         };
     });
-    counter= false ;
+    
 }
 
 controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {

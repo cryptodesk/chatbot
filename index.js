@@ -127,6 +127,7 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                 conversations[message.channel].status = CONVERSATION_STATUS_OFERTAS;
                 convo.next();
             });
+            //if(response =! ())
             convo.say('Muy buena elección!');
             convo.say('¿Donde quieres que te lo enviemos?');
             convo.ask({
@@ -151,7 +152,7 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                         "recipient_name":"Gabriel Esteban",
                         "order_number":"12345678902",
                         "currency":"EUR",
-                        "payment_method":"Visa 2345",
+                        "payment_method":"En efectivo",
                         "timestamp":"1428444852",
                         "elements":[
                                 {

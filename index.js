@@ -177,7 +177,9 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
                         }
                     }
                 }
-            });
+            }
+            );
+            convo.say('Disfruta del sushi!:)');
             conversations[message.channel].status = CONVERSATION_STATUS_PAGO;
         });
     }

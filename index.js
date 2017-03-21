@@ -43,10 +43,10 @@ let controller = botkit.facebookbot({
 
 let bot = controller.spawn({});
 
-controller.setupWebserver(process.env.PORT || 3000, (err,webserver) => {
+controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
     controller.createWebhookEndpoints(controller.webserver, bot, () => {
         if(ops.lt) {
-            var tunnel = localtunnel(process.env.PORT || 3000, {subdomain: ops.ltsubdomain}, function(err, tunnel) {
+            var tunnel = localtunnel(process.env.port || 3000, {subdomain: ops.ltsubdomain}, function(err, tunnel) {
                 if (err) {
                     console.log(err);
                     process.exit();

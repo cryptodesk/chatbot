@@ -63,37 +63,42 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 });
 
 //controller.hears(['hola'], 'message_received', (bot, message) => {
-controller.on('message_received', (bot, message) => {
-    bot.startConversation(message, (err, convo) => {
-        convo.say('Hola, somos instamaki.');
-        convo.say({
-            attachment: {
-                'type':'template',
-                'payload':{
-                    'template_type':'button',
-                    'text':'¿que podemos hacer por tí?',
-                    'buttons':[
-                        {
-                            'type':'postback',
-                            'title':'Ver ofertas',
-                            'payload':'ofertas'
-                        },
-                        {
-                            'type':'postback',
-                            'title':'Consultar locales',
-                            'payload':'locales'
-                        }
-                    ]
+let counter = true;
+if(counter){
+
+    controller.on('message_received', (bot, message) => {
+        bot.startConversation(message, (err, convo) => {
+            convo.say('Hola, somos instamaki.');
+            convo.say({
+                attachment: {
+                    'type':'template',
+                    'payload':{
+                        'template_type':'button',
+                        'text':'¿que podemos hacer por tí?',
+                        'buttons':[
+                            {
+                                'type':'postback',
+                                'title':'Ver ofertas',
+                                'payload':'ofertas'
+                            },
+                            {
+                                'type':'postback',
+                                'title':'Consultar locales',
+                                'payload':'locales'
+                            }
+                        ]
+                    }
                 }
-            }
+            });
         });
+        conversations[message.channel] = {
+            status: CONVERSATION_STATUS_HELLO,
+            coordinates: undefined,
+            items: []
+        };
     });
-    conversations[message.channel] = {
-        status: CONVERSATION_STATUS_HELLO,
-        coordinates: undefined,
-        items: []
-    };
-});
+    counter= false ;
+}
 
 controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
@@ -202,6 +207,7 @@ controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
             }
             );
             convo.say('Disfruta del sushi!:)');
+            counter= true ;
             conversations[message.channel].status = CONVERSATION_STATUS_PAGO;
         });
     }

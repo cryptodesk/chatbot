@@ -120,7 +120,7 @@ controller.on('message_received', (bot, message) => {
                         ]
                     }
                 }
-            }), 1000);
+            }), 10000);
             bot.reply(message,typing_off);
         });
         conversations[message.channel] = {

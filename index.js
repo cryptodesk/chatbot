@@ -101,7 +101,7 @@ controller.on('message_received', (bot, message) => {
                             {
                                 'type':'postback',
                                 'title':'No, I want to know more',
-                                'payload':'No:('
+                                'payload':'no'
                             }
                         ]
                     }
@@ -134,6 +134,49 @@ controller.hears(['yes!', 'si'], 'message_received', (bot, message) => {
     }
 });
 
+
+
+
+
+
+controller.hears(['n', 'no'], 'message_received', (bot, message) => {
+    if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
+        bot.startConversation(message, (err, convo) => {
+            convo.ask({
+                attachment: {
+                    'type':'template',
+                    'payload':{
+                        'template_type':'button',
+                        'text':'I can help you with any of this topics:',
+                        'buttons':[
+                            {
+                                'type':'postback',
+                                'title':'How my day it is going',
+                                'payload':'my day'
+                            },
+                            {
+                                'type':'postback',
+                                'title':'I want to buy/sell',
+                                'payload':'trade'
+                            },
+                            {
+                                'type':'postback',
+                                'title':'See an specific crypto',
+                                'payload':'See'
+                            }
+                        ]
+                    }
+                }
+            }, (response, convo2) => {
+                conversations[message.channel].items.push(response.text);
+                conversations[message.channel].status = CONVERSATION_STATUS_NO_USUAL_USER;
+                convo.next();
+            });
+            
+        });
+        flag= true;
+    }
+});
 
 
 

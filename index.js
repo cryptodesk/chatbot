@@ -104,7 +104,7 @@ controller.on('message_received', (bot, message) => {
 
 
 controller.hears(['yes!', 'si'], 'message_received', (bot, message) => {
-    if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
+    // if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
             
 
@@ -113,7 +113,7 @@ controller.hears(['yes!', 'si'], 'message_received', (bot, message) => {
             
         });
         flag= true;
-    }
+    // }
 });
 
 controller.hears(['No:(', 'No'], 'message_received', (bot, message) => {

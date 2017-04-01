@@ -62,6 +62,70 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
     });
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let flag= true ;
+controller.on('message_received', (bot, message) => {
+    if(flag){
+        flag = false ;
+        bot.startConversation(message, (err, convo) => {
+            convo.say('Hey! I am Deskie your cryptotrading assistant:)');
+            convo.say({
+                attachment: {
+                    'type':'template',
+                    'payload':{
+                        'template_type':'button',
+                        'text':'Do you know how can I help you?',
+                        'buttons':[
+                            {
+                                'type':'postback',
+                                'title':'Yes!',
+                                'payload':'Yes!'
+                            },
+                            {
+                                'type':'postback',
+                                'title':'No, I want to know more',
+                                'payload':'No:('
+                            }
+                        ]
+                    }
+                }
+            });
+        });
+        conversations[message.channel] = {
+            status: CONVERSATION_STATUS_HELLO,
+            coordinates: undefined,
+            items: []
+        };
+    }
+}); 
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
 controller.hears(['hola'], 'message_received', (bot, message) => {
     bot.startConversation(message, (err, convo) => {
         convo.say('Hola, somos instamaki.');
@@ -93,6 +157,8 @@ controller.hears(['hola'], 'message_received', (bot, message) => {
         items: []
     };
 });
+
+*/
 
 controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){

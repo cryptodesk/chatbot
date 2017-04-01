@@ -120,9 +120,9 @@ controller.on('message_received', (bot, message) => {
                         ]
                     }
                 }
-            }), 10000);
-            bot.reply(message,typing_off);
+            }), 100000);
         });
+        bot.reply(message,typing_off);
         conversations[message.channel] = {
             status: CONVERSATION_STATUS_HELLO,
             coordinates: undefined,

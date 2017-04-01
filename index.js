@@ -141,7 +141,7 @@ controller.hears(['yes!', 'si'], 'message_received', (bot, message) => {
 controller.hears(['n', 'no'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
-            convo.ask({
+            convo.say({
                 attachment: {
                     'type':'template',
                     'payload':{
@@ -166,10 +166,12 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
                         ]
                     }
                 }
-            }, (response, convo2) => {
-                conversations[message.channel].items.push(response.text);
-                conversations[message.channel].status = CONVERSATION_STATUS_USUAL_USER;
             });
+            conversations[message.channel] = {
+                status: CONVERSATION_STATUS_USUAL_USER,
+                coordinates: undefined,
+                items: []
+            };
             
         });
     }

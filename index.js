@@ -63,6 +63,8 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
     });
 });
 
+
+
 //controller.hears(['hola'], 'message_received', (bot, message) => {
 let flag= true ;
 controller.on('message_received', (bot, message) => {
@@ -101,125 +103,6 @@ controller.on('message_received', (bot, message) => {
 }); 
 
 
-    
-
-
-controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
-    if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
-        bot.startConversation(message, (err, convo) => {
-            convo.ask({
-                attachment: {
-                    'type':'template',
-                    'payload':{
-                        'template_type':'button',
-                        'text':'Actualmente tenemos disponible las siguientes ofertas:',
-                        'buttons':[
-                            {
-                                'type':'postback',
-                                'title':'Oferta A: 12 Piezas por 8€',
-                                'payload':'A'
-                            },
-                            {
-                                'type':'postback',
-                                'title':'Oferta B: 18 Piezas por 12€',
-                                'payload':'B'
-                            },
-                            {
-                                'type':'postback',
-                                'title':'Oferta C: 24 Piezas por 18€',
-                                'payload':'C'
-                            }
-                        ]
-                    }
-                }
-            }, (response, convo2) => {
-                conversations[message.channel].items.push(response.text);
-                conversations[message.channel].status = CONVERSATION_STATUS_OFERTAS;
-                convo.next();
-            });
-
-
-            /*let correct = false;
-            controller.hears(['A','B','C'], 'message_received', (bot, message) => {
-                //bot.startConversation(message, (err, convo) => {
-                    convo.say('Muy buena elección!');
-                    correct = true;
-                //});
-
-                //conversations[message.channel] = {
-                    //status: CONVERSATION_STATUS_HELLO,
-                   // coordinates: undefined,
-                   // items: []
-               // };
-            });
-
-            if (!correct){
-                convo.say('Tu opción no se encuentra dentro de la lista');
-            }*/
-
-            convo.say('¿Donde quieres que te lo enviemos?');
-            convo.ask({
-                'text': 'Compartir ubicación',
-                'quick_replies': [
-                    {
-                        'content_type': 'location'
-                    }
-                ]
-            }, (response, convo2) => {
-            conversations[message.channel].status = CONVERSATION_STATUS_DIRECCION;
-                conversations[message.channel].coordinates = response.attachments[0].payload.coordinates;
-                convo.next();
-            });
-            convo.say('Genial! Tu pedido ya está en camino.');
-            convo.say('Aquí tienes tu recibo');
-            convo.say({
-                "attachment":{
-                    "type":"template",
-                    "payload":{
-                        "template_type":"receipt",
-                        "recipient_name":"Gabriel Esteban",
-                        "order_number":"12345678902",
-                        "currency":"EUR",
-                        "payment_method":"En efectivo",
-                        "timestamp":"1428444852",
-                        "elements":[
-                                {
-                                    "title":"Maki de 24 piezas",
-                                    "subtitle":"24 piezas surtidas de excelente calidad",
-                                    "quantity":1,
-                                    "price":18,
-                                    "currency":"EUR",
-                                    "image_url":"http://manekinekosushi.com/wp-content/uploads/2016/08/maki_29_-maki_mixto.jpg"
-                                }
-                        ],
-                        "address":{
-                            "street_1":"C/ Jordi Girona 1-3 Campus Diagonal Nord",
-                            "street_2":"Edific C6 Espai Empren",
-                            "city":"Barcelona",
-                            "postal_code":"08034",
-                            "state":"BCN",
-                            "country":"ES"
-                        },
-                        "summary":{
-                            "subtotal":21.6,
-                            "shipping_cost":2.95,
-                            "total_tax":2.4,
-                            "total_cost":26.95
-                        }
-                    }
-                }
-            }
-            );
-            convo.say('Disfruta del sushi!:)');
-            flag = true ;
-            counter= true ;
-            conversations[message.channel].status = CONVERSATION_STATUS_PAGO;
-        });
-    }
-});
-
-
-
 controller.hears(['yes!', 'si'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
@@ -229,6 +112,7 @@ controller.hears(['yes!', 'si'], 'message_received', (bot, message) => {
             conversations[message.channel].status = CONVERSATION_STATUS_USUAL_USER;
             
         });
+        flag= true;
     }
 });
 
@@ -267,5 +151,6 @@ controller.hears(['No:(', 'No'], 'message_received', (bot, message) => {
             });
             
         });
+        flag= true;
     }
 });

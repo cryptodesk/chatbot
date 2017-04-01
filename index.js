@@ -10,6 +10,9 @@ const CONVERSATION_STATUS_OFERTAS = 2;
 const CONVERSATION_STATUS_DIRECCION = 3;
 const CONVERSATION_STATUS_PAGO = 4;
 const CONVERSATION_STATUS_FEEDBACK = 5;
+const CONVERSATION_STATUS_USUAL_USER = 6;
+const CONVERSATION_STATUS_NO_USUAL_USER = 7;
+
 let conversations = {};
 
 const ops = commandLineArgs([
@@ -93,7 +96,7 @@ controller.on('message_received', (bot, message) => {
                             {
                                 'type':'postback',
                                 'title':'Yes!',
-                                'payload':'Yes!'
+                                'payload':'yes!'
                             },
                             {
                                 'type':'postback',
@@ -118,47 +121,29 @@ controller.on('message_received', (bot, message) => {
 
 
 
+controller.hears(['yes!', 'si'], 'message_received', (bot, message) => {
+    if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
+        bot.startConversation(message, (err, convo) => {
+            
 
-
-
-
-
-
-/*
-
-controller.hears(['hola'], 'message_received', (bot, message) => {
-    bot.startConversation(message, (err, convo) => {
-        convo.say('Hola, somos instamaki.');
-        convo.say({
-            attachment: {
-                'type':'template',
-                'payload':{
-                    'template_type':'button',
-                    'text':'¿que podemos hacer por tí?',
-                    'buttons':[
-                        {
-                            'type':'postback',
-                            'title':'Ver ofertas',
-                            'payload':'ofertas'
-                        },
-                        {
-                            'type':'postback',
-                            'title':'Consultar locales',
-                            'payload':'locales'
-                        }
-                    ]
-                }
-            }
+            convo.say('Cool! Say me what you need');
+            conversations[message.channel].status = CONVERSATION_STATUS_USUAL_USER;
+            
         });
-    });
-    conversations[message.channel] = {
-        status: CONVERSATION_STATUS_HELLO,
-        coordinates: undefined,
-        items: []
-    };
+        flag= true;
+    }
 });
 
-*/
+
+
+
+
+
+
+
+
+
+
 
 controller.hears(['ofertas', 'pedido'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){

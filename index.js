@@ -120,8 +120,8 @@ controller.on('message_received', (bot, message) => {
                         ]
                     }
                 }
-            }), 200);
-            //bot.reply(message3,typing_off);
+            }), 700);
+            bot.reply(message,typing_off);
         });
         conversations[message.channel] = {
             status: CONVERSATION_STATUS_HELLO,

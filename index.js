@@ -11,7 +11,17 @@ const CONVERSATION_STATUS_DIRECCION = 3;
 const CONVERSATION_STATUS_PAGO = 4;
 const CONVERSATION_STATUS_FEEDBACK = 5;
 const CONVERSATION_STATUS_USUAL_USER = 6;
-const CONVERSATION_STATUS_NO_USUAL_USER = 7;
+const CONVERSATION_STATUS_CRYPTO = 7;
+
+let typing_on = {
+
+    sender_action: "typing_on"
+}
+
+let typing_off = {
+
+    sender_action: "typing_off"
+}
 
 let conversations = {};
 
@@ -42,6 +52,7 @@ let controller = botkit.facebookbot({
     app_secret: process.env.FACEBOOK_APP_SECRET,
     validate_requests: true,
     receive_via_postback: true,
+    require_delivery: true,  // aixo ho he ficat despres!!
 });
 
 let bot = controller.spawn({});
@@ -86,6 +97,8 @@ controller.on('message_received', (bot, message) => {
         flag = false ;
         bot.startConversation(message, (err, convo) => {
             convo.say('Hey! I am Deskie your cryptotrading assistant:)');
+            bot.reply(message2,typing_on);
+            setTimeout(
             convo.say({
                 attachment: {
                     'type':'template',
@@ -106,7 +119,8 @@ controller.on('message_received', (bot, message) => {
                         ]
                     }
                 }
-            });
+            }), 200);
+            bot.reply(message3,typing_off);
         });
         conversations[message.channel] = {
             status: CONVERSATION_STATUS_HELLO,

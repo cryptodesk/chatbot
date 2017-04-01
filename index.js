@@ -100,7 +100,7 @@ controller.on('message_received', (bot, message) => {
                             },
                             {
                                 'type':'postback',
-                                'title':'No, I want to know more',
+                                'title':'Know more',
                                 'payload':'no'
                             }
                         ]
@@ -151,7 +151,7 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
                         'buttons':[
                             {
                                 'type':'postback',
-                                'title':'How my day it is going',
+                                'title':'Day summary',
                                 'payload':'my day'
                             },
                             {
@@ -161,7 +161,7 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
                             },
                             {
                                 'type':'postback',
-                                'title':'See an specific crypto',
+                                'title':'See a crypto',
                                 'payload':'See'
                             }
                         ]

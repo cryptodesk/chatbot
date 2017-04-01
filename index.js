@@ -99,7 +99,7 @@ controller.on('message_received', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
             convo.say('Hey! I am Deskie your cryptotrading assistant:)');
             //bot.reply(message2,typing_on);
-            //setTimeout(
+            setTimeout(
             convo.say({
                 attachment: {
                     'type':'template',
@@ -120,7 +120,7 @@ controller.on('message_received', (bot, message) => {
                         ]
                     }
                 }
-            });//, 200);
+            }), 200);
             //bot.reply(message3,typing_off);
         });
         conversations[message.channel] = {

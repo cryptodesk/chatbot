@@ -12,6 +12,7 @@ const CONVERSATION_STATUS_PAGO = 4;
 const CONVERSATION_STATUS_FEEDBACK = 5;
 const CONVERSATION_STATUS_USUAL_USER = 6;
 const CONVERSATION_STATUS_CRYPTO = 7;
+const CONVERSATION_STATUS_INIT = 8;
 
 let typing_on = {
 
@@ -176,6 +177,11 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
                                 'type':'postback',
                                 'title':'See a crypto',
                                 'payload':'crypto'
+                            },
+                            {
+                                'type':'postback',
+                                'title':'Exit',
+                                'payload':'bye'
                             }
                         ]
                     }
@@ -205,6 +211,59 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
         });
         conversations[message.channel] = {
             status: CONVERSATION_STATUS_CRYPTO,
+            coordinates: undefined,
+            items: []
+        };
+        flag= true;
+    }
+});
+
+
+
+
+controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
+    if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
+        bot.startConversation(message, (err, convo) => {
+            convo.ask({
+                  "message":{
+                    "text":"Do you want to buy or sell?",
+                    "quick_replies":[
+                      {
+                        "content_type":"text",
+                        "title":"Buy",
+                        "payload":"BUY",
+                        "image_url":"http://bobmccarthy.com/wp-content/uploads/2013/03/buy-md.png"
+                      },
+                      {
+                        "content_type":"text",
+                        "title":"Sell",
+                        "payload":"SELL",
+                        "image_url":"http://www.grangerford.com/assets/misc/5897/155941.jpg"
+                      }
+                    ]
+                  }
+            }, (response, convo2) => {
+                conversations[message.channel].items.push(response.text);
+                conversations[message.channel].status = CONVERSATION_STATUS_OFERTAS;
+                convo.next();
+            });
+        flag= true;
+    }
+});
+
+
+
+
+
+controller.hears(['bye','exit','return','goodbye'], 'message_received', (bot, message) => {
+    if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
+        bot.startConversation(message, (err, convo) => {
+
+            convo.say('Goodbye! For more help remember than I am here!');
+            
+        });
+        conversations[message.channel] = {
+            status: CONVERSATION_STATUS_INIT,
             coordinates: undefined,
             items: []
         };

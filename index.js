@@ -97,7 +97,7 @@ controller.on('message_received', (bot, message) => {
         flag = false ;
         bot.startConversation(message, (err, convo) => {
             convo.say('Hey! I am Deskie your cryptotrading assistant:)');
-            bot.reply(message2,typing_on);
+            //bot.reply(message2,typing_on);
             //setTimeout(
             convo.say({
                 attachment: {
@@ -120,7 +120,7 @@ controller.on('message_received', (bot, message) => {
                     }
                 }
             });//, 200);
-            bot.reply(message3,typing_off);
+            //bot.reply(message3,typing_off);
         });
         conversations[message.channel] = {
             status: CONVERSATION_STATUS_HELLO,

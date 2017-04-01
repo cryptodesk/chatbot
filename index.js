@@ -99,8 +99,7 @@ controller.on('message_received', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
             convo.say('Hey! I am Deskie your cryptotrading assistant:)');
             //bot.reply(message2,typing_on);
-            setTimeout(
-            function() {convo.say({
+            convo.say({
                 attachment: {
                     'type':'template',
                     'payload':{
@@ -120,7 +119,7 @@ controller.on('message_received', (bot, message) => {
                         ]
                     }
                 }
-            })}, 200);
+            });
         });
         bot.reply(message,typing_off);
         conversations[message.channel] = {
@@ -165,8 +164,8 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
                         'buttons':[
                             {
                                 'type':'postback',
-                                'title':'Day summary',
-                                'payload':'my day'
+                                'title':'Summary',
+                                'payload':'summary'
                             },
                             {
                                 'type':'postback',

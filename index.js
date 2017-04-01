@@ -130,7 +130,6 @@ controller.hears(['yes!', 'si'], 'message_received', (bot, message) => {
             conversations[message.channel].status = CONVERSATION_STATUS_USUAL_USER;
             
         });
-        flag= true;
     }
 });
 
@@ -170,11 +169,9 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
             }, (response, convo2) => {
                 conversations[message.channel].items.push(response.text);
                 conversations[message.channel].status = CONVERSATION_STATUS_USUAL_USER;
-                convo.next();
             });
             
         });
-        flag= true;
     }
 });
 
@@ -195,6 +192,7 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
             coordinates: undefined,
             items: []
         };
+        flag= true;
     }
 });
 

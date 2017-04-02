@@ -275,7 +275,7 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
         bot.startConversation(message, (err, convo) => {
 
-            convo.say('What crypto do you want to see ?');
+            convo.say('What crypto do you want to see ?.');
             convo.ask('Say the name of the crypto: f.i eth:',[
             {
                 pattern: 'eth',

@@ -249,14 +249,14 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                   {
                     pattern: 'eth',
                     callback: function(response,convo) {
-                      convo.sayFirst('Ethereum exchange');
+                      convo.sayFirst('Ethereum exchange:');
                       convo.next();
                     }
                   },
                   {
                     pattern: 'btc',
                     callback: function(response,convo) {
-                      convo.sayFirst('Bitcoin exchange');
+                      convo.sayFirst('Bitcoin exchange:');
                       // do something else...
                       convo.next();
 
@@ -265,7 +265,7 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                   {
                     pattern: 'xmr',
                     callback: function(response,convo) {
-                      convo.sayFirst('Monero exchange');
+                      convo.sayFirst('Monero exchange:');
                       // do something else...
                       convo.next();
                     }

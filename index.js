@@ -238,51 +238,20 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
                 convo.say( json[2].amount + ' ' + json[2].currency + ' (-2%)');
                 convo.say( json[3].amount + ' ' + json[3].currency + ' (+11%)');
 
-//https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR
- /*       let total = 0;
 
-        for(var p = 0; p< crypto.length ;p++){
-
-            total = crypto[p].amount*crypto[p].btc + total ;
-
-            if(crypto[p]!=0){
-
-                if(crypto[p].name == 'BTC'){
-
-                    convo.say(crypto[p].amount + ' ' + crypto[p].name + ' (' + crypto[p].percentage + ') ');
-
-                }
-                else{
-
-                    convo.say(crypto[p].amount + ' ' + crypto[p].name + ' (' + crypto[p].percentage + ') ');
-                }
-
-            }
-        }
-        total = crypto[p].amount*crypto[p].btc + total ;
-        */
-
-
-
-
-
-        
           
-          /*
-          request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
+          
+                  request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
 
-            let json = JSON.parse(body);
-            btc_euro= json.last;
-   
-          });
+                    let json = JSON.parse(body);
+                    btc_euro= json.last;
+                    total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount + json[3].amount)*btc_euro ;
+                    convo.say('Total worth of your portfolio: ' + total + 'BTC');
+                    convo.say('Do you want to do more actions?');
+                    conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
+                  });
 
 
-        total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount + json[3].amount)*btc_euro ;
-        convo.say('Total worth of your portfolio: ' + total + 'BTC');
-        convo.say('Do you want to do more actions?');
-        conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
-
-*/
               }
         });
 

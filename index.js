@@ -398,7 +398,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                     }
                     convo.next();      
                 });
-                    request.post({url:'https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/movement/create', form: {from: Bitcoin, to: choosen, amount_from: Unit_number , amount_to: A}}(error,response,body)=>{
+                    request.post({url:'https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/movement/create', form: {from: Bitcoin, to: choosen, amount_from: Unit_number , amount_to: Par}}(error,response,body)=>{
                         if(error){
                             convo.say('internal error ocurred');
                         }else{

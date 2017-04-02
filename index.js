@@ -100,7 +100,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 
 let flag= true ;
 controller.on('message_received', (bot, message) => {
-    console.log(message);
+    //console.log(message);
     if(flag&&message.user!=413285102361285){
         flag = false ;
         //bot.reply(message,typing_on);

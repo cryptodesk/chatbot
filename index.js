@@ -21,9 +21,8 @@ let User ;
 
         User = body.replace('"','');
         
-        for( var i=0 ; i< User.length -1 ; i++){
-            User(i)=User(i)
-        }
+        User.slice([0[,User.length -1]]);
+        
         }); 
  
 

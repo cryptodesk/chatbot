@@ -243,8 +243,8 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
           
                   request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
 
-                    let json = JSON.parse(body);
-                    btc_euro= json.last;
+                    let json2 = JSON.parse(body);
+                    btc_euro= json2.last;
                     total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount + json[3].amount)*btc_euro ;
                     convo.say('Total worth of your portfolio: ' + total + 'BTC');
                     convo.say('Do you want to do more actions?');

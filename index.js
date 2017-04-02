@@ -231,6 +231,7 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
               else{
                 let json = JSON.parse(body);
                 convo.say('You have:');
+                console.log(body[0].amount);
                 convo.say( body[0].amount + '' + body[0].currency + ' (+15%)');
                 convo.say( body[1].amount + '' + body[1].currency + ' (+7%)');
                 convo.say( body[2].amount + '' + body[2].currency + ' (-2%)');

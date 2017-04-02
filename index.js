@@ -177,16 +177,17 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
                                 'type':'postback',
                                 'title':'See a crypto',
                                 'payload':'crypto'
-                            },
+                            }/*,
                             {
                                 'type':'postback',
                                 'title':'Exit',
                                 'payload':'bye'
-                            } 
+                            } */
                         ]
                     }
                 }
             });
+            convo.say('In other cases, say me goodbye and I will shutup');
             conversations[message.channel] = {
                 status: CONVERSATION_STATUS_USUAL_USER,
                 coordinates: undefined,

@@ -232,6 +232,8 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
         }
 
         convo.say('Total worth of your portfolio: ' + total + 'BTC');
+        convo.say('Do you want to do more actions?');
+        conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
         });
     }
 });
@@ -323,6 +325,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                     convo.say('estic dintre de venta');
                 }
                 convo.say('Do you want to do more actions?');
+
                 conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
             });
             

@@ -20,8 +20,9 @@ let User ;
      request('https://cryptodeskbackend.herokuapp.com/user',(error,response,body)=>{
 
         User = body.replace('"','');
-        console.log(User);
-    
+        
+        User = User.replace("",'');
+    console.log(User);
         }); 
  
 

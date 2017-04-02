@@ -142,6 +142,7 @@ controller.on('message_received', (bot, message) => {
 
 
 controller.hears(['yes!', 'si', 'yes'], 'message_received', (bot, message) => {
+    console.log(conversations[message.channel].status)
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
             

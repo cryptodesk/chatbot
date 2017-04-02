@@ -209,17 +209,17 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
         for(var p = 0; p< crypto.length ;p++){
 
-            total = crypto(p).amount*crypto(p).btc + total ;
+            total = crypto[p].amount*crypto[p].btc + total ;
 
-            if(crypto(p)!=0){
+            if(crypto[p]!=0){
 
-                if(crypto(p).name == 'BTC'){
+                if(crypto[p].name == 'BTC'){
 
-                bot.reply(message,'You have : '+ crypto(p).amount +  crypto(p).name );
+                bot.reply(message,'You have : '+ crypto[p].amount +  crypto[p].name );
 
                 }
 
-                bot.reply(message,'You have : '+ crypto(p).amount +  crypto(p).name );
+                bot.reply(message,'You have : '+ crypto[p].amount +  crypto[p].name );
 
             }
         }

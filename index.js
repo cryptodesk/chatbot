@@ -209,6 +209,7 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
 
         convo.say('Today it has been an incredible day!');
+        convo.say('You have:');
 
         let total = 0;
 
@@ -220,12 +221,12 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
                 if(crypto[p].name == 'BTC'){
 
-                    convo.say('You have : '+ crypto[p].amount + ' ' + crypto[p].name + ' (' + crypto[p].percentage + ') ');
+                    convo.say(crypto[p].amount + ' ' + crypto[p].name + ' (' + crypto[p].percentage + ') ');
 
                 }
                 else{
 
-                    convo.say('You have : '+ crypto[p].amount + ' ' + crypto[p].name + ' (' + crypto[p].percentage + ') ');
+                    convo.say(crypto[p].amount + ' ' + crypto[p].name + ' (' + crypto[p].percentage + ') ');
                 }
 
             }
@@ -243,6 +244,40 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
 
             convo.say('What crypto do you want to see ?');
+            convo.ask('Say the name of the crypto: f.i ETH:',[
+                  {
+                    pattern: 'eth',
+                    callback: function(response,convo) {
+                      convo.say('OK you are done!');
+                      convo.next();
+                    }
+                  },
+                  {
+                    pattern: btc,
+                    callback: function(response,convo) {
+                      convo.say('Great! I will continue...');
+                      // do something else...
+                      convo.next();
+
+                    }
+                  },
+                  {
+                    pattern: xmr,
+                    callback: function(response,convo) {
+                      convo.say('Perhaps later.');
+                      // do something else...
+                      convo.next();
+                    }
+                  },
+                  {
+                    default: true,
+                    callback: function(response,convo) {
+                      // just repeat the question
+                      convo.repeat();
+                      convo.next();
+                    }
+                  }
+                ]);
             
         });
         conversations[message.channel] = {
@@ -252,10 +287,6 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
         };
     }
 });
-
-
-
-
 
 
 

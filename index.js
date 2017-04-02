@@ -14,15 +14,15 @@ const CONVERSATION_STATUS_INIT = 8;
 
 let crypto=[];
 
-let User ;
+let User2 ;
 
 
      request('https://cryptodeskbackend.herokuapp.com/user',(error,response,body)=>{
 
-        User = body.replace('"','');
+        User2 = body.replace('"','');
         
-        User.slice(0,3);
-        console.log(User);
+        User2.slice(0,3);
+        
         
         }); 
  
@@ -224,7 +224,7 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
         convo.say('Today it has been an incredible day!');
         convo.say('You have:');
 
-        request('https://cryptodeskbackend.herokuapp.com/user/'+User+'/balance',(error,response,body)=>{
+        request('https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/balance',(error,response,body)=>{
               if(error){
                 convo.say('internal error ocurred');
               }

@@ -16,7 +16,7 @@ let crypto=[];
 
 https://cryptodeskbackend.herokuapp.com/
 
-let User ;
+let User = [];
 
 
      request('https://cryptodeskbackend.herokuapp.com/user',(error,response,body)=>{

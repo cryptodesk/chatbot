@@ -380,7 +380,8 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 console.log(response.text);
                 if(response.text == "Buy"){
                     convo.ask('What Crypto do you want to Buy. (Respect to Bitcoin and with format type: BTC_ETH)?',function(response,convo){
-                        choosen = response.text;
+                        //choosen = response.text;
+                        choosen = conversations[message.channel].message;
                         convo.say('Good choice.');
                         convo.next();
                     });

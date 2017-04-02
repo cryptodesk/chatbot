@@ -258,7 +258,8 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
             }
         }
-*/      total = crypto[p].amount*crypto[p].btc + total ;
+        total = crypto[p].amount*crypto[p].btc + total ;
+        */
         convo.say('Total worth of your portfolio: ' + total + 'BTC');
         convo.say('Do you want to do more actions?');
         conversations[message.channel].status = CONVERSATION_STATUS_HELLO;

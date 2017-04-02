@@ -94,7 +94,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 
 let flag= true ;
 controller.on('message_received', (bot, message) => {
-    console.log(flag);
+    console.log(message);
     if(flag){
         flag = false ;
         //bot.reply(message,typing_on);
@@ -259,7 +259,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
 
 
 controller.hears(['bye','exit','return','goodbye'], 'message_received', (bot, message) => {
-    flag= true;
+    flag = true;
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
         bot.startConversation(message, (err, convo) => {
 

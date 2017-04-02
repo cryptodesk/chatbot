@@ -14,6 +14,21 @@ const CONVERSATION_STATUS_INIT = 8;
 
 let crypto=[];
 
+https://cryptodeskbackend.herokuapp.com/
+
+getUser(){
+     request('https://cryptodeskbackend.herokuapp.com/user',(error,response,body)=>{
+    if(error){
+        convo.say('internal error ocurred');
+             }
+    else{
+        user = body ;
+        }
+    return body   
+        }); 
+ }
+
+ const User = getUser(); 
 
 crypto.push({
     name: "ETH",
@@ -211,6 +226,15 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
         convo.say('Today it has been an incredible day!');
         convo.say('You have:');
+
+                        request('https://cryptodeskbackend.herokuapp.com/'+User+'balance',(error,response,body)=>{
+                      if(error){
+                        convo.say('internal error ocurred');
+                      }
+                      else{
+                        let json = JSON.parse(body);
+                        convo.sayFirst('Monero exchange: '+json );
+                      }
 
         let total = 0;
 

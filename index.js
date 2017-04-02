@@ -110,7 +110,7 @@ controller.on('message_received', (bot, message) => {
                         'buttons':[
                             {
                                 'type':'postback',
-                                'title':'Yes!',
+                                'title':'Yes!!',
                                 'payload':'yes!'
                             },
                             {

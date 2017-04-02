@@ -380,12 +380,12 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 console.log(response.text);
                 if(response.text == "Buy"){
                     convo.ask('What Crypto do you want to Buy (Respect to Bitcoin and with format type: BTC_ETH)?',function(response,convo){
+                        choosen = response.text;
                         convo.say('Good choice.');
-                        choosen = response.message;
                         convo.next();
                     });
                     convo.ask('How many units?',function(response,convo){
-                        Unit_number= response.message;
+                        Unit_number= response.text;
                         convo.next();
                     });
                     console.log(choosen);

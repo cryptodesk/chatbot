@@ -388,6 +388,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                         Unit_number= response.message;
                         convo.next();
                     });
+                    console.log(choosen);
                     request('https://cryptodeskbackend.herokuapp.com/tick/'+choosen,(error,response,body)=>{
                       if(error){
                         convo.say('internal error ocurred');

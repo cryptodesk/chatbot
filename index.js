@@ -94,6 +94,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 
 let flag= true ;
 controller.on('message_received', (bot, message) => {
+    console.log(flag);
     if(flag){
         flag = false ;
         //bot.reply(message,typing_on);

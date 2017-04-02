@@ -253,7 +253,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 convo.next();
             });
         flag= true;
-        }
+        });
     }
 });
 

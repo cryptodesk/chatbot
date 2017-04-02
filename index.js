@@ -16,19 +16,15 @@ let crypto=[];
 
 https://cryptodeskbackend.herokuapp.com/
 
-getUser(){
-     request('https://cryptodeskbackend.herokuapp.com/user',(error,response,body)=>{
-    if(error){
-        convo.say('internal error ocurred');
-             }
-    else{
-        user = body ;
-        }
-    return body   
-        }); 
- }
+let User ;
 
- const User = getUser(); 
+
+     request('https://cryptodeskbackend.herokuapp.com/user',(error,response,body)=>{
+
+        User = body ;
+    
+        }); 
+ 
 
 crypto.push({
     name: "ETH",

@@ -253,7 +253,7 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                     }
                   },
                   {
-                    pattern: btc,
+                    pattern: 'btc',
                     callback: function(response,convo) {
                       convo.say('Great! I will continue...');
                       // do something else...
@@ -262,7 +262,7 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                     }
                   },
                   {
-                    pattern: xmr,
+                    pattern: 'xmr',
                     callback: function(response,convo) {
                       convo.say('Perhaps later.');
                       // do something else...

@@ -314,6 +314,8 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 conversations[message.channel].status = CONVERSATION_STATUS_OFERTAS;
                 convo.next();
             });
+               console.log(response.text);
+               
             if(response.text == "buy"){
                 convo.ask('estic dintre de compra');
             }

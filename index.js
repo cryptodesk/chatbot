@@ -2,6 +2,7 @@ let dotenv = require('dotenv');
 let botkit = require('botkit');
 let commandLineArgs = require('command-line-args');
 let localtunnel = require('localtunnel');
+let request = require('request');
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const CONVERSATION_STATUS_CRYPTO = 7;
 const CONVERSATION_STATUS_INIT = 8;
 
 let crypto=[];
+
 
 crypto.push({
     name: "ETH",
@@ -249,8 +251,17 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                   {
                     pattern: 'eth',
                     callback: function(response,convo) {
-                      convo.sayFirst('Ethereum exchange:');
-                      convo.next();
+                      
+                      request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
+                      if(error){
+                        convo.say('internal error ocurred');
+                      }
+                      else{
+                        convo.sayFirst('Ethereum exchange: '+body.last);
+                      }
+                      convo.next();      
+                      });
+                      
                     }
                   },
                   {

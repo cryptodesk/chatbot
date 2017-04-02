@@ -19,17 +19,20 @@ let crypto=[];
 crypto.push({
     name: "ETH",
     amount: 5 ,
-    btc: 0.1})
+    btc: 0.1,
+    percentage: '+30%'})
 
 crypto.push({
     name: "BTC",
     amount: 2 ,
-    btc: 1})
+    btc: 1,
+    percentage: '-2%'})
 
 crypto.push({
     name: "XMR",
     amount: 100 ,
-    btc: 0.06})
+    btc: 0.06 ,
+    percentage: '+11%'})
 
 let typing_on = {
 
@@ -217,12 +220,12 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
                 if(crypto[p].name == 'BTC'){
 
-                    convo.say('You have : '+ crypto[p].amount + ' ' + crypto[p].name );
+                    convo.say('You have : '+ crypto[p].amount + ' ' + crypto[p].name + ' (' + crypto[p].percentage + ') ');
 
                 }
                 else{
 
-                    convo.say('You have : '+ crypto[p].amount + ' ' + crypto[p].name );
+                    convo.say('You have : '+ crypto[p].amount + ' ' + crypto[p].name + ' (' + crypto[p].percentage + ') ');
                 }
 
             }

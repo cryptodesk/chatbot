@@ -324,10 +324,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 }
                 convo.say('Do you want to do more actions?');
             });
-            conversations[message.channel] = {
-            status: CONVERSATION_STATUS_HELLO,
-            coordinates: undefined,
-            items: []
+            conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
         };
 
         });

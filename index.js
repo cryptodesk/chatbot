@@ -165,7 +165,7 @@ controller.hears(['yes!', 'si', 'yes'], 'message_received', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
 
 
-            convo.say('Cool! Say me what do you need');
+            convo.say('Cool! Say me what do you need.');
             conversations[message.channel].status = CONVERSATION_STATUS_USUAL_USER;
             
         });

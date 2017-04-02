@@ -6,10 +6,6 @@ let localtunnel = require('localtunnel');
 dotenv.config();
 
 const CONVERSATION_STATUS_HELLO = 1;
-const CONVERSATION_STATUS_OFERTAS = 2;
-const CONVERSATION_STATUS_DIRECCION = 3;
-const CONVERSATION_STATUS_PAGO = 4;
-const CONVERSATION_STATUS_FEEDBACK = 5;
 const CONVERSATION_STATUS_USUAL_USER = 6;
 const CONVERSATION_STATUS_CRYPTO = 7;
 const CONVERSATION_STATUS_INIT = 8;
@@ -125,7 +121,7 @@ controller.on('message_received', (bot, message) => {
                             {
                                 'type':'postback',
                                 'title':'Know more',
-                                'payload':'no'
+                                'payload':'more'
                             }
                         ]
                     }
@@ -157,7 +153,7 @@ controller.hears(['yes!', 'si', 'yes'], 'message_received', (bot, message) => {
 
 
 
-controller.hears(['n', 'no'], 'message_received', (bot, message) => {
+controller.hears(['more'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
             convo.say({
@@ -244,18 +240,18 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
 
             convo.say('What crypto do you want to see ?');
-            convo.ask('Say the name of the crypto: f.i ETH:',[
+            convo.ask('Say the name of the crypto: f.i eth:',[
                   {
                     pattern: 'eth',
                     callback: function(response,convo) {
-                      convo.say('OK you are done!');
+                      convo.say('Ethereum exchange');
                       convo.next();
                     }
                   },
                   {
                     pattern: 'btc',
                     callback: function(response,convo) {
-                      convo.say('Great! I will continue...');
+                      convo.say('Bitcoin exchange');
                       // do something else...
                       convo.next();
 
@@ -264,7 +260,7 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                   {
                     pattern: 'xmr',
                     callback: function(response,convo) {
-                      convo.say('Perhaps later.');
+                      convo.say('Monero exchange');
                       // do something else...
                       convo.next();
                     }
@@ -278,10 +274,11 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                     }
                   }
                 ]);
+             convo.say('Do you want to do more actions?');
             
         });
         conversations[message.channel] = {
-            status: CONVERSATION_STATUS_CRYPTO,
+            status: CONVERSATION_STATUS_HELLO,
             coordinates: undefined,
             items: []
         };
@@ -323,9 +320,9 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
 
 
 
-controller.hears(['bye','exit','return','goodbye'], 'message_received', (bot, message) => {
+controller.hears(['bye','exit','return','goodbye','no'], 'message_received', (bot, message) => {
     flag = true;
-    if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
+    if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER||CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
 
             convo.say('Goodbye! For more help remember than I am here!!');

@@ -25,6 +25,7 @@ let typing_off = {
 }
 
 let conversations = {};
+let eth = 5 ;
 
 const ops = commandLineArgs([
       {
@@ -200,7 +201,12 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
 });
 
 
+controller.hears(['summary','overview','resume'], 'message_received', (bot, message) => {
+    if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
 
+        bot.reply(message,'Today it has been an incredible day, you have :'+ eth + ' ETH .');
+    }
+});
 
 
 
@@ -216,7 +222,6 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
             coordinates: undefined,
             items: []
         };
-        flag= true;
     }
 });
 
@@ -252,7 +257,6 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 conversations[message.channel].status = CONVERSATION_STATUS_OFERTAS;
                 convo.next();
             });
-        flag= true;
         });
     }
 });

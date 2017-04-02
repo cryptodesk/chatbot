@@ -321,8 +321,8 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
 
 
 
-controller.hears(['bye','exit','return','goodbye','no'], 'message_received', (bot, message) => {
-    flag = true;
+controller.hears(['bye','exit','return','goodbye','^.*\\bno\\b.*$'], 'message_received', (bot, message) => {
+
     if(conversations[message.channel] && (conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER||conversations[message.channel].status === CONVERSATION_STATUS_HELLO)){
         bot.startConversation(message, (err, convo) => {
 
@@ -334,7 +334,7 @@ controller.hears(['bye','exit','return','goodbye','no'], 'message_received', (bo
             coordinates: undefined,
             items: []
         };
-        
+        flag = true;
     }
 });
 

@@ -232,13 +232,13 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
                 let json = JSON.parse(body);
                 convo.say('You have:');
                 //console.log(body[0].amount);
-                convo.say( json[0].amount + '' + json[0].currency + ' (+15%)');
-                convo.say( json[1].amount + '' + json[1].currency + ' (+7%)');
-                convo.say( json[2].amount + '' + json[2].currency + ' (-2%)');
-                convo.say( json[3].amount + '' + json[3].currency + ' (+11%)');
+                convo.say( json[0].amount + ' ' + json[0].currency + ' (+15%)');
+                convo.say( json[1].amount + ' ' + json[1].currency + ' (+7%)');
+                convo.say( json[2].amount + ' ' + json[2].currency + ' (-2%)');
+                convo.say( json[3].amount + ' ' + json[3].currency + ' (+11%)');
 
 //https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR
-        let total = 0;
+ /*       let total = 0;
 
         for(var p = 0; p< crypto.length ;p++){
 
@@ -258,7 +258,7 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
             }
         }
-
+*/      total = crypto[p].amount*crypto[p].btc + total ;
         convo.say('Total worth of your portfolio: ' + total + 'BTC');
         convo.say('Do you want to do more actions?');
         conversations[message.channel].status = CONVERSATION_STATUS_HELLO;

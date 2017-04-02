@@ -14,19 +14,22 @@ const CONVERSATION_STATUS_INIT = 8;
 const dollar_euro = 0.9642 ;
 
 let crypto=[];
+let choosen;
+let Unit_number;
+let Par;
 
 let User2 ;
 
 
-     request('https://cryptodeskbackend.herokuapp.com/user',(error,response,body)=>{
+request('https://cryptodeskbackend.herokuapp.com/user',(error,response,body)=>{
 
-        User2 = body.replace('"','');
-        
-        User2.slice(0,3);
-        
-        
-        }); 
- 
+    User2 = body.replace('"','');
+
+    User2.slice(0,3);
+
+
+}); 
+
 
 crypto.push({
     name: "ETH",
@@ -60,22 +63,22 @@ let conversations = {};
 
 
 const ops = commandLineArgs([
-      {
-          alias: 'l',
-          name: 'lt',
-          args: 1,
-          description: 'Use localtunnel.me to make your bot available on the web.',
-          type: Boolean,
-          defaultValue: false
-      },
-      {
-          name: 'ltsubdomain',
-          alias: 's',
-          args: 1,
-          description: 'Custom subdomain for the localtunnel.me URL. This option can only be used together with --lt.',
-          type: String,
-          defaultValue: null
-      },
+{
+  alias: 'l',
+  name: 'lt',
+  args: 1,
+  description: 'Use localtunnel.me to make your bot available on the web.',
+  type: Boolean,
+  defaultValue: false
+},
+{
+  name: 'ltsubdomain',
+  alias: 's',
+  args: 1,
+  description: 'Custom subdomain for the localtunnel.me URL. This option can only be used together with --lt.',
+  type: String,
+  defaultValue: null
+},
 ]);
 
 let controller = botkit.facebookbot({
@@ -130,16 +133,16 @@ controller.on('message_received', (bot, message) => {
                         'template_type':'button',
                         'text':'Do you know how can I help you?',
                         'buttons':[
-                            {
-                                'type':'postback',
-                                'title':'Yes!!',
-                                'payload':'yes!'
-                            },
-                            {
-                                'type':'postback',
-                                'title':'Know more',
-                                'payload':'more'
-                            }
+                        {
+                            'type':'postback',
+                            'title':'Yes!!',
+                            'payload':'yes!'
+                        },
+                        {
+                            'type':'postback',
+                            'title':'Know more',
+                            'payload':'more'
+                        }
                         ]
                     }
                 }
@@ -160,7 +163,7 @@ controller.hears(['yes!', 'si', 'yes'], 'message_received', (bot, message) => {
     console.log(conversations[message.channel].status)
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
-            
+
 
             convo.say('Cool! Say me what do you need');
             conversations[message.channel].status = CONVERSATION_STATUS_USUAL_USER;
@@ -181,30 +184,30 @@ controller.hears(['more'], 'message_received', (bot, message) => {
                         'template_type':'button',
                         'text':'I can help you with any of this topics:',
                         'buttons':[
-                            {
-                                'type':'postback',
-                                'title':'Summary',
-                                'payload':'summary'
-                            },
-                            {
-                                'type':'postback',
-                                'title':'I want to buy/sell',
-                                'payload':'trade'
-                            },
-                            {
-                                'type':'postback',
-                                'title':'See a crypto',
-                                'payload':'crypto'
+                        {
+                            'type':'postback',
+                            'title':'Summary',
+                            'payload':'summary'
+                        },
+                        {
+                            'type':'postback',
+                            'title':'I want to buy/sell',
+                            'payload':'trade'
+                        },
+                        {
+                            'type':'postback',
+                            'title':'See a crypto',
+                            'payload':'crypto'
                             }/*,
                             {
                                 'type':'postback',
                                 'title':'Exit',
                                 'payload':'bye'
                             } */
-                        ]
+                            ]
+                        }
                     }
-                }
-            });
+                });
             convo.say('In other cases, say me goodbye and I will shutup');
             conversations[message.channel] = {
                 status: CONVERSATION_STATUS_USUAL_USER,
@@ -222,13 +225,13 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
         bot.startConversation(message,function(err,convo){
 
 
-        convo.say('Today it has been an incredible day!');
+            convo.say('Today it has been an incredible day!');
 
-        request('https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/balance',(error,response,body)=>{
+            request('https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/balance',(error,response,body)=>{
               if(error){
                 convo.say('internal error ocurred:S');
-              }
-              else{
+            }
+            else{
                 let json = JSON.parse(body);
                 convo.say('You have:');
                 //console.log(body[0].amount);
@@ -238,28 +241,28 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
                 convo.say( json[3].amount + ' ' + json[3].currency + ' (+11%)');
 
 
-          
-          
-                  request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
+
+
+                request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
                     let json3 = JSON.parse(body);
-                            request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
-                                let json4 = JSON.parse(body);
-                                                      request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
-                                                        
-                    let json2 = JSON.parse(body);
-                    let btc_xmr= json2.last;
-                    let btc_eth= json4.last;
-                    let btc_euro= json3.last;
-                    total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount*btc_eth + json[3].amount*btc_xmr)*btc_euro ;
-                    convo.say('Total worth of your portfolio: ' + total + ' EUR');
-                    convo.say('Do you want to do more actions?');
-                    conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
-                                                      });
-                             });                    
-                  });
+                    request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
+                        let json4 = JSON.parse(body);
+                        request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
+
+                            let json2 = JSON.parse(body);
+                            let btc_xmr= json2.last;
+                            let btc_eth= json4.last;
+                            let btc_euro= json3.last;
+                            total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount*btc_eth + json[3].amount*btc_xmr)*btc_euro ;
+                            convo.say('Total worth of your portfolio: ' + total + ' EUR');
+                            convo.say('Do you want to do more actions?');
+                            conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
+                        });
+                    });                    
+                });
 
 
-              }
+            }
         });
 
 
@@ -268,72 +271,71 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 });
 
 
-
 controller.hears(['crypto'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
         bot.startConversation(message, (err, convo) => {
 
             convo.say('What crypto do you want to see ?');
             convo.ask('Say the name of the crypto: f.i eth:',[
-                  {
-                    pattern: 'eth',
-                    callback: function(response,convo) {
-                      
-                      request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
+            {
+                pattern: 'eth',
+                callback: function(response,convo) {
+
+                  request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
                       if(error){
                         convo.say('internal error ocurred');
-                      }
-                      else{
+                    }
+                    else{
                         let json = JSON.parse(body);
                         convo.sayFirst('Ethereum exchange: '+json.last + ' BTC');
-                      }
-                      convo.next();      
-                      });
-                      
                     }
-                  },
-                  {
-                    pattern: 'btc',
-                    callback: function(response,convo) {
+                    convo.next();      
+                });
 
-                      request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
-                      if(error){
-                        convo.say('internal error ocurred');
-                      }
-                      else{
-                        let json = JSON.parse(body);
-                        convo.sayFirst('Bitcoin exchange: '+json.last + ' Euros');
-                      }
-                      convo.next();      
-                      });
+              }
+          },
+          {
+            pattern: 'btc',
+            callback: function(response,convo) {
 
-                    }
-                  },
-                  {
-                    pattern: 'xmr',
-                    callback: function(response,convo) {
+              request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
+                  if(error){
+                    convo.say('internal error ocurred');
+                }
+                else{
+                    let json = JSON.parse(body);
+                    convo.sayFirst('Bitcoin exchange: '+json.last + ' Euros');
+                }
+                convo.next();      
+            });
 
-                      request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
-                      if(error){
-                        convo.say('internal error ocurred.');
-                      }
-                      else{
-                        let json = JSON.parse(body);
-                        convo.sayFirst('Monero exchange: '+json.last + ' BTC');
-                      }
-                      convo.next();      
-                      });
-                    }
-                  },
-                  {
-                    default: true,
-                    callback: function(response,convo) {
+          }
+      },
+      {
+        pattern: 'xmr',
+        callback: function(response,convo) {
+
+          request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
+              if(error){
+                convo.say('internal error ocurred.');
+            }
+            else{
+                let json = JSON.parse(body);
+                convo.sayFirst('Monero exchange: '+json.last + ' BTC');
+            }
+            convo.next();      
+        });
+      }
+  },
+  {
+    default: true,
+    callback: function(response,convo) {
                       // just repeat the question
                       convo.repeat();
                       convo.next();
-                    }
                   }
-                ]);
+              }
+              ]);
             convo.say('Do you want to do more actions?');
             
         });
@@ -348,47 +350,76 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
 
 
 
+
+
+
+
 controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
         bot.startConversation(message, (err, convo) => {
             convo.ask({
-                  
-                    "text":"Do you want to buy or sell?",
-                    "quick_replies":[
-                      {
-                        "content_type":"text",
-                        "title":"Buy",
-                        "payload":"buy",
-                        "image_url":"http://bobmccarthy.com/wp-content/uploads/2013/03/buy-md.png"
-                      },
-                      {
-                        "content_type":"text",
-                        "title":"Sell",
-                        "payload":"sell",
-                        "image_url":"http://www.grangerford.com/assets/misc/5897/155941.jpg"
-                      }
-                    ]
-            
+                "text":"Do you want to buy or sell?",
+                "quick_replies":[
+                {
+                    "content_type":"text",
+                    "title":"Buy",
+                    "payload":"buy",
+                    "image_url":"http://bobmccarthy.com/wp-content/uploads/2013/03/buy-md.png"
+                },
+                {
+                    "content_type":"text",
+                    "title":"Sell",
+                    "payload":"sell",
+                    "image_url":"http://www.grangerford.com/assets/misc/5897/155941.jpg"
+                }
+                ]
             }, (response, convo2) => {
                 conversations[message.channel].items.push(response.text);
                 conversations[message.channel].status = CONVERSATION_TRADE;
                 convo.next();
                 console.log(response.text);
                 if(response.text == "Buy"){
-                    convo.say('estic dintre de compra');
-                }
-                else{
+                    convo.ask('What Crypto do you want to Buy (Respect to Bitcoin and with format type: BTC_ETH)?',function(response,convo){
+                        convo.say('Good choice.');
+                        choosen = response.message;
+                        convo.next();
+                    });
+                    convo.ask('How many units?',function(response,convo){
+                        Unit_number= response.message;
+                        convo.next();
+                    });
+                    request('https://cryptodeskbackend.herokuapp.com/tick/'+choosen,(error,response,body)=>{
+                      if(error){
+                        convo.say('internal error ocurred');
+                    }
+                    else{
+                        let json = JSON.parse(body);
+                        Par = json.last;
+                    }
+                    convo.next();      
+                });
+                    request.post({url:'https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/movement/create', form: {from: Bitcoin, to: choosen, amount_from: Unit_number , amount_to: A}}(error,response,body)=>{
+                        if(error){
+                            convo.say('internal error ocurred');
+                        }else{
+                            let json = JSON.parse(body);
+                            convo.say('You have bought at: '+json.last + ' BTC');
+                        }   
+                    });
+                }else{
                     convo.say('estic dintre de venta');
                 }
                 convo.say('Do you want to do more actions?');
-
                 conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
             });
-            
-
         });
     }
 });
+
+
+
+
+
 
 
 controller.hears(['bye','exit','return','goodbye','^.*\\bno\\b.*$'], 'message_received', (bot, message) => {
@@ -397,7 +428,7 @@ controller.hears(['bye','exit','return','goodbye','^.*\\bno\\b.*$'], 'message_re
         bot.startConversation(message, (err, convo) => {
 
             convo.say('Goodbye! For more help remember than I am here!');
-            
+
         });
         conversations[message.channel] = {
             status: CONVERSATION_STATUS_INIT,
@@ -406,6 +437,4 @@ controller.hears(['bye','exit','return','goodbye','^.*\\bno\\b.*$'], 'message_re
         };
         flag = true;
     }
-});
-
-
+}

@@ -383,7 +383,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                         console.log(response);
                         choosen = response.text;
                         //choosen = conversations[message.channel].message;
-                        convo.say('Good choice.');
+                        convo.say('Good choice. Now you have it in your wallet');
                         convo.next();
                     });
                     convo.ask('How many units?',function(response,convo){

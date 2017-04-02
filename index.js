@@ -21,7 +21,7 @@ let User ;
 
         User = body.replace('"','');
         
-        User.slice(0,User.length -2);
+        User.slice(0,User.length - 8);
         console.log(User);
         
         }); 

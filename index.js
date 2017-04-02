@@ -177,12 +177,12 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
                                 'type':'postback',
                                 'title':'See a crypto',
                                 'payload':'crypto'
-                            }/*,
+                            },
                             {
                                 'type':'postback',
                                 'title':'Exit',
                                 'payload':'bye'
-                            } */
+                            } 
                         ]
                     }
                 }

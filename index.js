@@ -228,7 +228,7 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
             }
         }
 
-        convo.say(,'Total worth of your portfolio: ' + total + 'BTC');
+        convo.say('Total worth of your portfolio: ' + total + 'BTC');
         });
     }
 });

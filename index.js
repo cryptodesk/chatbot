@@ -298,13 +298,13 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                       {
                         "content_type":"text",
                         "title":"Buy",
-                        "payload":"BUY",
+                        "payload":"buy",
                         "image_url":"http://bobmccarthy.com/wp-content/uploads/2013/03/buy-md.png"
                       },
                       {
                         "content_type":"text",
                         "title":"Sell",
-                        "payload":"SELL",
+                        "payload":"sell",
                         "image_url":"http://www.grangerford.com/assets/misc/5897/155941.jpg"
                       }
                     ]
@@ -314,6 +314,9 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 conversations[message.channel].status = CONVERSATION_STATUS_OFERTAS;
                 convo.next();
             });
+            if(response.text == "buy"){
+                convo.ask('estic dintre de compra');
+            }
         });
     }
 });

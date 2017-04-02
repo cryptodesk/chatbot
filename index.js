@@ -220,14 +220,17 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
     }
 });
 
-/*
+
+
+
+
 
 
 controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
         bot.startConversation(message, (err, convo) => {
             convo.ask({
-                  "message":{
+                  
                     "text":"Do you want to buy or sell?",
                     "quick_replies":[
                       {
@@ -243,7 +246,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                         "image_url":"http://www.grangerford.com/assets/misc/5897/155941.jpg"
                       }
                     ]
-                  }
+            
             }, (response, convo2) => {
                 conversations[message.channel].items.push(response.text);
                 conversations[message.channel].status = CONVERSATION_STATUS_OFERTAS;
@@ -254,7 +257,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
     }
 });
 
-*/
+
 
 
 

@@ -14,6 +14,23 @@ const CONVERSATION_STATUS_USUAL_USER = 6;
 const CONVERSATION_STATUS_CRYPTO = 7;
 const CONVERSATION_STATUS_INIT = 8;
 
+let crypto[];
+
+crypto.push({
+    name: "ETH",
+    amount: 5 ,
+    btc: 0.1})
+
+crypto.push({
+    name: "BTC",
+    amount: 2 ,
+    btc: 1})
+
+crypto.push({
+    name: "XMR",
+    amount: 100 ,
+    btc: 0.06})
+
 let typing_on = {
 
     sender_action: "typing_on"
@@ -25,7 +42,7 @@ let typing_off = {
 }
 
 let conversations = {};
-let eth = 5 ;
+
 
 const ops = commandLineArgs([
       {
@@ -81,18 +98,6 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 let flag= true ;
 controller.on('message_received', (bot, message) => {
     console.log(message);
@@ -135,9 +140,6 @@ controller.on('message_received', (bot, message) => {
 
 
 
-
-
-
 controller.hears(['yes!', 'si', 'yes'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
@@ -149,9 +151,6 @@ controller.hears(['yes!', 'si', 'yes'], 'message_received', (bot, message) => {
         });
     }
 });
-
-
-
 
 
 
@@ -204,7 +203,29 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
 controller.hears(['summary','overview','resume'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
 
-        bot.reply(message,'Today it has been an incredible day, you have :'+ eth + ' ETH .');
+        bot.reply(message,'Today it has been an incredible day!');
+
+        let total = 0;
+
+        for(var p = 0; p< crypto.length ;p++){
+
+            total = crypto(p).amount*crypto(p).btc + total ;
+
+            if(crypto(p)!=0){
+
+                if(crypto(p).name == 'BTC'){
+
+                bot.reply(message,'You have : '+ crypto(p).amount +  crypto(p).name );
+
+                }
+
+                bot.reply(message,'You have : '+ crypto(p).amount +  crypto(p).name );
+
+            }
+        }
+
+        bot.reply(message,'Total worth of your wallet: ' + total + 'BTC');
+        
     }
 });
 
@@ -264,8 +285,6 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
 
 
 
-
-
 controller.hears(['bye','exit','return','goodbye'], 'message_received', (bot, message) => {
     flag = true;
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
@@ -282,7 +301,5 @@ controller.hears(['bye','exit','return','goodbye'], 'message_received', (bot, me
         
     }
 });
-
-
 
 

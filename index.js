@@ -14,7 +14,7 @@ const CONVERSATION_STATUS_USUAL_USER = 6;
 const CONVERSATION_STATUS_CRYPTO = 7;
 const CONVERSATION_STATUS_INIT = 8;
 
-let crypto[];
+let crypto=[];
 
 crypto.push({
     name: "ETH",

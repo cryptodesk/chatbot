@@ -379,7 +379,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 convo.next();
                 console.log(response.text);
                 if(response.text == "Buy"){
-                    convo.ask('What Crypto do you want to Buy. (Respect to Bitcoin and with format type: BTC_ETH)?',function(response,convo){
+                    convo.ask('What Crypto do you want to Buy. (Respect to Bitcoin and with format type: ETH)?',function(response,convo){
                         console.log(response);
                         choosen = response.text;
                         //choosen = conversations[message.channel].message;
@@ -391,7 +391,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                         convo.next();
                     });
                     console.log(choosen);
-                    request('https://cryptodeskbackend.herokuapp.com/tick/'+choosen,(error,response,body)=>{
+                    request('https://cryptodeskbackend.herokuapp.com/tick/BTC_'+choosen,(error,response,body)=>{
                       if(error){
                         convo.say('internal error ocurred');
                     }
@@ -401,7 +401,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                     }
                     convo.next();      
                 });
-                    request.post({url:'https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/movement/create', form: {from: Bitcoin, to: choosen, amount_from: Unit_number , amount_to: Par}}, (error,response,body)=>{
+                    request.post({url:'https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/movement/create', form: {from: "BTC", to: choosen, amount_from: Unit_number , amount_to: Par}}, (error,response,body)=>{
                         if(error){
                             convo.say('internal error ocurred');
                         }else{

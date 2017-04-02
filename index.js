@@ -20,6 +20,7 @@ let User ;
      request('https://cryptodeskbackend.herokuapp.com/user',(error,response,body)=>{
 
         User = body.replace('"','');
+        console.log(User);
     
         }); 
  
@@ -221,7 +222,7 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
         convo.say('Today it has been an incredible day!');
         convo.say('You have:');
 
-        request('https://cryptodeskbackend.herokuapp.com/'+User+'/balance',(error,response,body)=>{
+        request('https://cryptodeskbackend.herokuapp.com/user/'+User+'/balance',(error,response,body)=>{
               if(error){
                 convo.say('internal error ocurred');
               }

@@ -226,7 +226,7 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
         request('https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/balance',(error,response,body)=>{
               if(error){
-                convo.say('internal error ocurred');
+                convo.say('internal error ocurred:S');
               }
               else{
                 let json = JSON.parse(body);

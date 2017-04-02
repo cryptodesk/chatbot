@@ -257,7 +257,8 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                         convo.say('internal error ocurred');
                       }
                       else{
-                        convo.sayFirst('Ethereum exchange: '+body);
+                        let json = JSON.parse(body);
+                        convo.sayFirst('Ethereum exchange: '+json.last);
                       }
                       convo.next();      
                       });

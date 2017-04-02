@@ -21,8 +21,9 @@ let User ;
 
         User = body.replace('"','');
         
-        User = User.replace("",'');
-    console.log(User);
+        for( var i=0 ; i< User.length -1 ; i++){
+            User(i)=User(i)
+        }
         }); 
  
 

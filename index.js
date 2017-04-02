@@ -404,7 +404,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                             convo.say('internal error ocurred');
                         }else{
                             let json = JSON.parse(body);
-                            convo.say('You have bought at: '+json.last + ' BTC');
+                            convo.say('You have bought at: '+ Unit_number+ ' BTC');
                         }   
 
                         convo.say('Do you want to do more actions?');

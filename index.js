@@ -318,13 +318,20 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                 if(response.text == "Buy"){
                     convo.say('estic dintre de compra');
                 }
+                else{
+                    convo.say('estic dintre de venta');
+                }
+                convo.say('Do you want to do more actions?');
             });
+            conversations[message.channel] = {
+            status: CONVERSATION_STATUS_HELLO,
+            coordinates: undefined,
+            items: []
+        };
 
         });
     }
 });
-
-
 
 
 controller.hears(['bye','exit','return','goodbye','^.*\\bno\\b.*$'], 'message_received', (bot, message) => {

@@ -261,7 +261,15 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
         }
         total = crypto[p].amount*crypto[p].btc + total ;
         */
-                  request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
+
+
+
+
+
+        
+          
+          /*
+          request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
 
             let json = JSON.parse(body);
             btc_euro= json.last;
@@ -274,7 +282,7 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
         convo.say('Do you want to do more actions?');
         conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
 
-
+*/
               }
         });
 

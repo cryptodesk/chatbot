@@ -258,7 +258,7 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                       }
                       else{
                         let json = JSON.parse(body);
-                        convo.sayFirst('Ethereum exchange: '+json.last);
+                        convo.sayFirst('Ethereum exchange: '+json.last + ' BTC');
                       }
                       convo.next();      
                       });
@@ -268,18 +268,34 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                   {
                     pattern: 'btc',
                     callback: function(response,convo) {
-                      convo.sayFirst('Bitcoin exchange:');
-                      // do something else...
-                      convo.next();
+
+                      request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
+                      if(error){
+                        convo.say('internal error ocurred');
+                      }
+                      else{
+                        let json = JSON.parse(body);
+                        convo.sayFirst('Bitcoin exchange: '+json.last + ' Euros');
+                      }
+                      convo.next();      
+                      });
 
                     }
                   },
                   {
                     pattern: 'xmr',
                     callback: function(response,convo) {
-                      convo.sayFirst('Monero exchange:');
-                      // do something else...
-                      convo.next();
+
+                      request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
+                      if(error){
+                        convo.say('internal error ocurred');
+                      }
+                      else{
+                        let json = JSON.parse(body);
+                        convo.sayFirst('Monero exchange: '+json.last + ' BTC');
+                      }
+                      convo.next();      
+                      });
                     }
                   },
                   {

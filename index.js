@@ -389,8 +389,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                     convo.ask('How many units?',function(response,convo){
                         Unit_number= response.text;
                         convo.next();
-                    });
-                    console.log(choosen);
+                        console.log(choosen);
                     request('https://cryptodeskbackend.herokuapp.com/tick/BTC_'+choosen,(error,response,body)=>{
                       if(error){
                         convo.say('internal error ocurred');
@@ -399,8 +398,10 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                         let json = JSON.parse(body);
                         Par = json.last;
                     }
-                    convo.next();      
+                         
                 });
+                    });
+                    
                     request.post({url:'https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/movement/create', form: {from: "BTC", to: choosen, amount_from: Unit_number , amount_to: Par}}, (error,response,body)=>{
                         if(error){
                             convo.say('internal error ocurred');
@@ -410,7 +411,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                         }   
                     });
                 }else{
-                    convo.say('estic dintre de venta');
+                    convo.say('estic dintre de venta.');
                 }
                 convo.say('Do you want to do more actions?');
                 conversations[message.channel].status = CONVERSATION_STATUS_HELLO;

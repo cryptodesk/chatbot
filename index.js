@@ -95,7 +95,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 let flag= true ;
 controller.on('message_received', (bot, message) => {
     console.log(message);
-    if(flag){
+    if(flag&&message.user==1359625444131573){
         flag = false ;
         //bot.reply(message,typing_on);
         bot.startConversation(message, (err, convo) => {

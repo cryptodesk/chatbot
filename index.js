@@ -322,7 +322,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
 
 controller.hears(['bye','exit','return','goodbye','no'], 'message_received', (bot, message) => {
     flag = true;
-    if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER||CONVERSATION_STATUS_HELLO){
+    if(conversations[message.channel] && (conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER||conversations[message.channel].status === CONVERSATION_STATUS_HELLO)){
         bot.startConversation(message, (err, convo) => {
 
             convo.say('Goodbye! For more help remember than I am here!');

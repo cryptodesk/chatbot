@@ -202,8 +202,10 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
 
 controller.hears(['summary','overview','resume'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
+        bot.startConversation(message,function(err,convo){
 
-        bot.reply(message,'Today it has been an incredible day!');
+
+        convo.say('Today it has been an incredible day!');
 
         let total = 0;
 
@@ -215,17 +217,19 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
                 if(crypto[p].name == 'BTC'){
 
-                bot.reply(message,'You have : '+ crypto[p].amount +  crypto[p].name );
+                    convo.say('You have : '+ crypto[p].amount + ' ' + crypto[p].name );
 
                 }
+                else{
 
-                bot.reply(message,'You have : '+ crypto[p].amount +  crypto[p].name );
+                    convo.say('You have : '+ crypto[p].amount + ' ' + crypto[p].name );
+                }
 
             }
         }
 
-        bot.reply(message,'Total worth of your wallet: ' + total + 'BTC');
-        
+        convo.say(,'Total worth of your portfolio: ' + total + 'BTC');
+        });
     }
 });
 

@@ -407,7 +407,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                             convo.say('You have bought : '+ Unit_number+ ' '+ choosen);
                         }   
 
-                        convo.say('Do you want to do more actions??');
+                        convo.say('Do you want to do more actions?');
                         conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
                     });
                          

@@ -187,7 +187,7 @@ controller.hears(['more'], 'message_received', (bot, message) => {
                     }
                 }
             });
-            convo.say('In other cases, say me goodbye and I will shutup...');
+            convo.say('In other cases, say me goodbye and I will shutup.');
             conversations[message.channel] = {
                 status: CONVERSATION_STATUS_USUAL_USER,
                 coordinates: undefined,
@@ -325,7 +325,7 @@ controller.hears(['bye','exit','return','goodbye','no'], 'message_received', (bo
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER||CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
 
-            convo.say('Goodbye! For more help remember than I am here!!');
+            convo.say('Goodbye! For more help remember than I am here!');
             
         });
         conversations[message.channel] = {

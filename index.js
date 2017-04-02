@@ -190,7 +190,7 @@ controller.hears(['more'], 'message_received', (bot, message) => {
                     }
                 }
             });
-            convo.say('In other cases, say me goodbye and I will shutup.');
+            convo.say('In other cases, say me goodbye and I will shutup...');
             conversations[message.channel] = {
                 status: CONVERSATION_STATUS_USUAL_USER,
                 coordinates: undefined,

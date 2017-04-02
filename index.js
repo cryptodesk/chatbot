@@ -323,9 +323,9 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                     convo.say('estic dintre de venta');
                 }
                 convo.say('Do you want to do more actions?');
+                conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
             });
-            conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
-        };
+            
 
         });
     }

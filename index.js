@@ -6,6 +6,7 @@ let localtunnel = require('localtunnel');
 dotenv.config();
 
 const CONVERSATION_STATUS_HELLO = 1;
+const CONVERSATION_TRADE = 2;
 const CONVERSATION_STATUS_USUAL_USER = 6;
 const CONVERSATION_STATUS_CRYPTO = 7;
 const CONVERSATION_STATUS_INIT = 8;
@@ -100,7 +101,7 @@ controller.setupWebserver(process.env.port || 3000, (err,webserver) => {
 let flag= true ;
 controller.on('message_received', (bot, message) => {
     //console.log(message);
-    console.log(flag);
+    //console.log(flag);
     if(flag&&message.user!=413285102361285){
         flag = false ;
         //bot.reply(message,typing_on);
@@ -311,11 +312,11 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
             
             }, (response, convo2) => {
                 conversations[message.channel].items.push(response.text);
-                conversations[message.channel].status = CONVERSATION_STATUS_OFERTAS;
+                conversations[message.channel].status = CONVERSATION_TRADE;
                 convo.next();
             });
                console.log(response.text);
-               
+
             if(response.text == "buy"){
                 convo.ask('estic dintre de compra');
             }

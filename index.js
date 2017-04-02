@@ -220,7 +220,7 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
     }
 });
 
-/*
+
 
 
 controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
@@ -254,7 +254,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
 });
 
 
-*/
+
 
 
 

@@ -231,10 +231,10 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
               else{
                 let json = JSON.parse(body);
                 convo.say('You have:');
-                convo.say( body[0].amount + '' + body[0].currency + ' (+15%)';
-                convo.say( body[1].amount + '' + body[1].currency + ' (+7%)';
-                convo.say( body[2].amount + '' + body[2].currency + ' (-2%)';
-                convo.say( body[3].amount + '' + body[3].currency + ' (+11%)';
+                convo.say( body[0].amount + '' + body[0].currency + ' (+15%)');
+                convo.say( body[1].amount + '' + body[1].currency + ' (+7%)');
+                convo.say( body[2].amount + '' + body[2].currency + ' (-2%)');
+                convo.say( body[3].amount + '' + body[3].currency + ' (+11%)');
 
 //https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR
         let total = 0;

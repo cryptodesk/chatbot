@@ -311,7 +311,7 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
 
                       request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
                       if(error){
-                        convo.say('internal error ocurred');
+                        convo.say('internal error ocurred.');
                       }
                       else{
                         let json = JSON.parse(body);

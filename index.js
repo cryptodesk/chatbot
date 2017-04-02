@@ -96,7 +96,7 @@ let flag= true ;
 controller.on('message_received', (bot, message) => {
     if(flag){
         flag = false ;
-        bot.reply(message,typing_on);
+        //bot.reply(message,typing_on);
         bot.startConversation(message, (err, convo) => {
             convo.say('Hey! I am Deskie your cryptotrading assistant:)');
             //bot.reply(message2,typing_on);
@@ -122,7 +122,7 @@ controller.on('message_received', (bot, message) => {
                 }
             });
         });
-        bot.reply(message,typing_off);
+        //bot.reply(message,typing_off);
         conversations[message.channel] = {
             status: CONVERSATION_STATUS_HELLO,
             coordinates: undefined,
@@ -136,12 +136,12 @@ controller.on('message_received', (bot, message) => {
 
 
 
-controller.hears(['yes!', 'si'], 'message_received', (bot, message) => {
+controller.hears(['yes!', 'si', 'yes'], 'message_received', (bot, message) => {
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_HELLO){
         bot.startConversation(message, (err, convo) => {
             
 
-            convo.say('Cool! Say me what you need');
+            convo.say('Cool! Say me what do you need');
             conversations[message.channel].status = CONVERSATION_STATUS_USUAL_USER;
             
         });
@@ -177,12 +177,12 @@ controller.hears(['n', 'no'], 'message_received', (bot, message) => {
                                 'type':'postback',
                                 'title':'See a crypto',
                                 'payload':'crypto'
-                            },
+                            }/*,
                             {
                                 'type':'postback',
                                 'title':'Exit',
                                 'payload':'bye'
-                            }
+                            } */
                         ]
                     }
                 }

@@ -221,15 +221,13 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
         convo.say('Today it has been an incredible day!');
         convo.say('You have:');
 
-                        request('https://cryptodeskbackend.herokuapp.com/'+User+'/balance',(error,response,body)=>{
-                      if(error){
-                        convo.say('internal error ocurred');
-                      }
-                      else{
-                        let json = JSON.parse(body);
-                        convo.sayFirst('Balance 2: '+json );
-                      }
-                  });
+        request('https://cryptodeskbackend.herokuapp.com/'+User+'/balance',(error,response,body)=>{
+              if(error){
+                convo.say('internal error ocurred');
+              }
+              else{
+                let json = JSON.parse(body);
+                convo.sayFirst('Balance 2: '+json );
 
         let total = 0;
 
@@ -255,6 +253,12 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
         convo.say('Total worth of your portfolio: ' + total + 'BTC');
         convo.say('Do you want to do more actions?');
         conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
+
+
+              }
+        });
+
+
         });
     }
 });

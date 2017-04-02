@@ -230,7 +230,7 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
               }
               else{
                 let json = JSON.parse(body);
-                convo.sayFirst('Balance 2: '+json );
+                convo.sayFirst('Balance 2: '+body);
 
         let total = 0;
 

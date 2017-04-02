@@ -220,7 +220,7 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
     }
 });
 
-
+/*
 
 
 controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
@@ -254,7 +254,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
     }
 });
 
-
+*/
 
 
 
@@ -264,7 +264,7 @@ controller.hears(['bye','exit','return','goodbye'], 'message_received', (bot, me
     if(conversations[message.channel] && conversations[message.channel].status === CONVERSATION_STATUS_USUAL_USER){
         bot.startConversation(message, (err, convo) => {
 
-            convo.say('Goodbye! For more help remember than I am here!');
+            convo.say('Goodbye! For more help remember than I am here!!');
             
         });
         conversations[message.channel] = {

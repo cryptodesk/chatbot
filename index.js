@@ -14,9 +14,7 @@ const CONVERSATION_STATUS_INIT = 8;
 
 let crypto=[];
 
-https://cryptodeskbackend.herokuapp.com/
-
-let User = [];
+let User ;
 
 
      request('https://cryptodeskbackend.herokuapp.com/user',(error,response,body)=>{

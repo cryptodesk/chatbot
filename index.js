@@ -247,9 +247,9 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
                                                       request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
                                                         
                     let json2 = JSON.parse(body);
-                    btc_xmr= json2.last;
-                    btc_eth= json4.last;
-                    btc_xmr= json3.last;
+                    let btc_xmr= json2.last;
+                    let btc_eth= json4.last;
+                    let btc_euro= json3.last;
                     total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount*btc_eth + json[3].amount*btc_xmr)*btc_euro ;
                     convo.say('Total worth of your portfolio: ' + total + ' EUR');
                     convo.say('Do you want to do more actions?');

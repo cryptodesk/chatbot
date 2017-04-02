@@ -223,7 +223,6 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
 
 
         convo.say('Today it has been an incredible day!');
-        convo.say('You have:');
 
         request('https://cryptodeskbackend.herokuapp.com/user/58e08359cf47080008daca34/balance',(error,response,body)=>{
               if(error){
@@ -242,13 +241,21 @@ controller.hears(['summary','overview','resume'], 'message_received', (bot, mess
           
           
                   request('https://cryptodeskbackend.herokuapp.com/tick/BTC_EUR',(error,response,body)=>{
-
+                    let json3 = JSON.parse(body);
+                            request('https://cryptodeskbackend.herokuapp.com/tick/BTC_ETH',(error,response,body)=>{
+                                let json4 = JSON.parse(body);
+                                                      request('https://cryptodeskbackend.herokuapp.com/tick/BTC_XMR',(error,response,body)=>{
+                                                        
                     let json2 = JSON.parse(body);
-                    btc_euro= json2.last;
-                    total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount + json[3].amount)*btc_euro ;
-                    convo.say('Total worth of your portfolio: ' + total + 'BTC');
+                    btc_xmr= json2.last;
+                    btc_eth= json4.last;
+                    btc_xmr= json3.last;
+                    total = (json[2].amount*dollar_euro) +(json[0].amount + json[1].amount*btc_eth + json[3].amount*btc_xmr)*btc_euro ;
+                    convo.say('Total worth of your portfolio: ' + total + ' EUR');
                     convo.say('Do you want to do more actions?');
                     conversations[message.channel].status = CONVERSATION_STATUS_HELLO;
+                                                      });
+                             });                    
                   });
 
 

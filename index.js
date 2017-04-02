@@ -279,9 +279,10 @@ controller.hears(['crypto'], 'message_received', (bot, message) => {
                     }
                   }
                 ]);
-             convo.say('Do you want to do more actions?');
+            // convo.say('Do you want to do more actions?');
             
         });
+        bot.reply(message,'Do you want to do more actions?')
         conversations[message.channel] = {
             status: CONVERSATION_STATUS_HELLO,
             coordinates: undefined,

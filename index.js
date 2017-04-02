@@ -416,7 +416,7 @@ controller.hears(['trade','buy','sell'], 'message_received', (bot, message) => {
                     
                     
                 }else{
-                    convo.say('estic dintre de venta.');
+                    convo.say('You do not have enough.');
                 }
                 
             });
